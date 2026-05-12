@@ -7,12 +7,12 @@ import Productdata from './GETDATA/Productdata'
 import Home from './PAGES/Home'
 import Navbar from './COMPONENT/Navbar'
 import Product from './PAGES/Product'
-import Card from './COMPONENT/Card'
 import Cartpage from './PAGES/Cartpage'
 import Singleproduct from './PAGES/Singleproduct'
 import Checkout from './PAGES/Checkout'
 import Register from './PAGES/Register'
 import Login from './PAGES/Login'
+import About from './PAGES/About'
 import Footer from './COMPONENT/Footer'
 import Ctagorypage from './PAGES/Ctagorypage'
 
@@ -38,12 +38,12 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/product' element={<Product/>}/>
-        
+        <Route path='/about' element={<About/>}/>
         <Route path='/catagory/:item' element={<Ctagorypage/>}/>
         <Route path='/cart' element={<Cartpage/>}/>
         <Route path='/singleproduct/:id' element={<Singleproduct/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
-        <Route  path='/register' element={<Register/>}/>
+        <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
       <Footer/>

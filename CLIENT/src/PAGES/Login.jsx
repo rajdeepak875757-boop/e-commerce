@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setuser } from '../REDUX/UserSlice'
-import axios from 'axios'
+import api from '../utils/api'
 import signup from '../assets/signup.png'
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     const handledata = async (e)=>{
         e.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', dataa)
+            const response = await api.post('/api/auth/login', dataa)
             dispatch(setuser({ user: response.data.user, token: response.data.token }))
             localStorage.setItem('token', response.data.token)
             alert('Login successful')

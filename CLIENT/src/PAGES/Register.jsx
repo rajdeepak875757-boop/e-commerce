@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import signup from '../assets/signup.png'
-import { FcGoogle } from "react-icons/fc";
-import {Link} from 'react-router-dom'
+import { FcGoogle } from 'react-icons/fc'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setuser } from '../REDUX/UserSlice'
-import axios from 'axios'
+import api from '../utils/api'
 
 const Register = () => {
   const [dataa, setdataa] = useState({
@@ -25,7 +25,7 @@ const Register = () => {
   const handledata = async (e) => {
     e.preventDefault()
     try {
-        const response = await axios.post('http://localhost:5000/api/auth/register', dataa)
+        const response = await api.post('/api/auth/register', dataa)
         dispatch(setuser({ user: response.data.user, token: response.data.token }))
         localStorage.setItem('token', response.data.token)
         alert('Registration successful')

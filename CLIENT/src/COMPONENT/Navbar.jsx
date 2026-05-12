@@ -39,10 +39,10 @@ const Navbar = () => {
            </div>
            <div className='hidden md:flex w-[30vw]'>
               <ul className='flex justify-between text-[19px] capitalize font-semibold w-full'>
-               <Link to={'/'}><li>Home</li></Link> 
-               <Link><li>contact</li></Link> 
-                <Link><li>about</li></Link>
-                {!user.isAuthenticated && <Link to={'/register'}><li>signup</li></Link>}
+               <Link to='/'><li>Home</li></Link>
+               <Link to='/about'><li>About</li></Link>
+               <Link><li>Contact</li></Link>
+               {!user.isAuthenticated && <Link to='/register'><li>Signup</li></Link>}
               </ul>
            </div>
            <div className='flex gap-5 items-center'>
@@ -71,10 +71,10 @@ const Navbar = () => {
               <AiOutlineClose onClick={()=>setMenuOpen(false)} className='text-3xl' />
             </div>
             <ul className='flex flex-col items-center text-[19px] capitalize font-semibold gap-4 pb-4'>
-              <Link to={'/'} onClick={()=>setMenuOpen(false)}><li>Home</li></Link> 
-              <Link onClick={()=>setMenuOpen(false)}><li>contact</li></Link> 
-              <Link onClick={()=>setMenuOpen(false)}><li>about</li></Link>
-              {!user.isAuthenticated && <Link to={'/register'} onClick={()=>setMenuOpen(false)}><li>signup</li></Link>}
+              <Link to='/' onClick={()=>setMenuOpen(false)}><li>Home</li></Link>
+              <Link to='/about' onClick={()=>setMenuOpen(false)}><li>About</li></Link>
+              <Link onClick={()=>setMenuOpen(false)}><li>Contact</li></Link>
+              {!user.isAuthenticated && <Link to='/register' onClick={()=>setMenuOpen(false)}><li>Signup</li></Link>}
               <input type="search" placeholder='what are you looking for ?' className='capitalize bg-black/20 px-3 py-2 rounded-sm w-3/4' />
             </ul>
           </div>

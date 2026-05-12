@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { addToCartAsync } from '../REDUX/Cartslice'
-import axios from 'axios'
+import api from '../utils/api'
 
 const Singleproduct = () => {
     const {id} = useParams()
@@ -15,7 +15,7 @@ const Singleproduct = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/products/${id}`)
+                const response = await api.get(`/api/products/${id}`)
                 setProduct(response.data)
                 setLoading(false)
             } catch (error) {
@@ -38,26 +38,33 @@ const Singleproduct = () => {
     if (loading) return <div>Loading...</div>
     if (!product) return <div>Product not found</div>
 
+  const productImage = product.image || 'https://via.placeholder.com/600x400?text=No+Image'
+  const productTitle = product.title || 'Product'
+
   return (
      <>
-      <div className='py-25 px-5 flex'>
-          <div className=' w-[50%] '>
+      <div className='py-25 px-5 flex flex-col lg:flex-row gap-10'>
+          <div className='w-full lg:w-1/2'>
              <div>
-                 <img src={product.image} alt="img" className='center h-[40vw]' />
+                 <img src={productImage} alt={productTitle} className='w-full h-auto object-contain' />
              </div>
-             <div className='flex justify-between'>
-                <img src={product.image}  alt="img" className='h-15' />
-                <img src={product.image} alt="img" className='h-15'  />
-                <img src={product.image} alt="img" className='h-15'  />
-                <img src={product.image} alt="img" className='h-15'  />
+             <div className='flex flex-wrap gap-4 mt-4'>
+                <img src={productImage} alt={productTitle} className='h-20 w-20 object-cover rounded-lg' />
+                <img src={productImage} alt={productTitle} className='h-20 w-20 object-cover rounded-lg' />
+                <img src={productImage} alt={productTitle} className='h-20 w-20 object-cover rounded-lg' />
+                <img src={productImage} alt={productTitle} className='h-20 w-20 object-cover rounded-lg' />
              </div>
           </div>
-          <div className='w-[50vw] '>
+          <div className='w-full lg:w-1/2'>
              <h1 className='text-2xl font-semibold pb-5'>{product.title}</h1>
              <h1 className='text-[20px]'>${product.price}</h1>
-             <h1 className='text-[18px]'>{product.description}</h1>
-             <h1 className='text-2xl bg-black/10'><span className='p-2' onClick={()=>setQuantity((prev)=>prev > 0 ? prev - 1 : 0)}>-</span>{quantity} <span className='p-2 bg-black/10' onClick={()=>setQuantity((prev)=>  prev+1)}>+</span></h1>
-             <button onClick={handleAddToCart} className='mt-4 bg-blue-500 text-white px-4 py-2'>Add to Cart</button>
+             <p className='text-[18px] mb-4'>{product.description}</p>
+             <div className='inline-flex items-center gap-3 text-2xl bg-black/10 p-2 rounded-lg'>
+               <span className='cursor-pointer px-3' onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>-</span>
+               <span>{quantity}</span>
+               <span className='cursor-pointer px-3' onClick={() => setQuantity((prev) => prev + 1)}>+</span>
+             </div>
+             <button onClick={handleAddToCart} className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg'>Add to Cart</button>
           </div>
       </div>
      </>
