@@ -15,6 +15,9 @@ const orderSchema = new mongoose.Schema({
     phone: String,
     email: String
   },
+  shippingMethod: { type: String, default: 'standard' },
+  shippingCost: { type: Number, default: 0 },
+  paymentIntentId: { type: String },
   status: { type: String, default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });

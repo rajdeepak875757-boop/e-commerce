@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  server:
+    build: ./SERVER
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/ecommerce
+      - JWT_SECRET=fghjkjhgghjkjhg
+      - STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
+    depends_on:
+      - mongo
+
+  client:
+    build: ./CLIENT
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

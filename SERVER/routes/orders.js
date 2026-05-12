@@ -6,13 +6,16 @@ const router = express.Router();
 
 // Create order
 router.post('/', auth, async (req, res) => {
-  const { items, totalPrice, shippingAddress } = req.body;
+  const { items, totalPrice, shippingAddress, shippingMethod, shippingCost, paymentIntentId } = req.body;
   try {
     const order = new Order({
       userId: req.user.id,
       items,
       totalPrice,
-      shippingAddress
+      shippingAddress,
+      shippingMethod,
+      shippingCost,
+      paymentIntentId
     });
     await order.save();
     res.json(order);
